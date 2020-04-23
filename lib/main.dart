@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'Welcome to Flutter',
       theme: new ThemeData(
         primaryColor: Colors.blue,
-      ),//程序主题
+      ), //程序主题
       home: new Scaffold(
         // appBar: new AppBar(
         //   title: new Text('Welcome to Flutter'),
@@ -77,41 +77,41 @@ class RandomWordsState extends State<RandomWords> {
   }
 
   Widget build(BuildContext context) {
-    // final wordPair = new WordPair.random();
-    // return new Text(wordPair.asPascalCase);
-    void _pushSaved() {
-      Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-        final tiles = _saved.map((pair) {
-          return new ListTile(
-            title: new Text(
-              pair.asPascalCase,
-              style: _biggerFont,
-            ),
-          );
-        });
-        final divided = ListTile.divideTiles(
-          context: context,
-          tiles: tiles,
-        ).toList();
-        return new Scaffold(
-          appBar: new AppBar(
-            title: new Text('Saved Suggestions'),
+
+    Drawer() {
+      final tiles = _saved.map((pair) {
+        return new ListTile(
+          title: new Text(
+            pair.asPascalCase,
+            style: _biggerFont,
           ),
-          body: new ListView(children: divided),
         );
-      }));
-    }//跳转方法
+      });
+      final divided = ListTile.divideTiles(
+        context: context,
+        tiles: tiles,
+      ).toList();
+      return new Scaffold(
+        appBar: new AppBar(
+          title: new Text('Saved Suggestions'),
+        ),
+        body: new ListView(children: divided),
+      );
+    }
 
     return new Scaffold(
       appBar: new AppBar(
+        // leading: BackButton(),
         title: new Text('Startup Name Generator'),
-        actions: <Widget>[
-          new IconButton(
-            icon: new Icon(Icons.list),
-            onPressed: _pushSaved,
-          )//添加跳转图标，方法
-        ],
+
+        // actions: <Widget>[
+        //   new IconButton(
+        //     icon: new Icon(Icons.list),
+        //     onPressed: _pushSaved,
+        //   ) //添加跳转图标，方法
+        // ],
       ),
+      drawer: Drawer(),
       body: _build(),
     );
   }
