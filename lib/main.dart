@@ -77,41 +77,51 @@ class RandomWordsState extends State<RandomWords> {
   }
 
   Widget build(BuildContext context) {
-
-    Drawer() {
-      final tiles = _saved.map((pair) {
-        return new ListTile(
-          title: new Text(
-            pair.asPascalCase,
-            style: _biggerFont,
-          ),
-        );
-      });
-      final divided = ListTile.divideTiles(
-        context: context,
-        tiles: tiles,
-      ).toList();
-      return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Saved Suggestions'),
-        ),
-        body: new ListView(children: divided),
-      );
-    }
-
     return new Scaffold(
       appBar: new AppBar(
         // leading: BackButton(),
         title: new Text('Startup Name Generator'),
-
-        // actions: <Widget>[
-        //   new IconButton(
-        //     icon: new Icon(Icons.list),
-        //     onPressed: _pushSaved,
-        //   ) //添加跳转图标，方法
-        // ],
+        // bottom: TabBar(
+        //   isScrollable: true,
+        //   tabs: <Widget>[
+        //     Text('列表'),
+        //     Text('列表'),
+        //     Text('列表'),
+        //     Text('列表'),
+        //     Text('列表')
+        //   ],
+        //   controller: TabController(length: 5, vsync: this),
+        // ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              Navigator.of(context)
+                  .push(new MaterialPageRoute(builder: (context) {
+                final tiles = _saved.map((pair) {
+                  return new ListTile(
+                    title: new Text(
+                      pair.asPascalCase,
+                      style: _biggerFont,
+                    ),
+                  );
+                });
+                final divided = ListTile.divideTiles(
+                  context: context,
+                  tiles: tiles,
+                ).toList();
+                return new Scaffold(
+                  appBar: new AppBar(
+                    title: new Text('Saved Suggestions'),
+                  ),
+                  body: new ListView(children: divided),
+                );
+              }));
+            },
+          ), //列表项
+          IconButton(icon: Icon(Icons.add), onPressed: () {}),
+        ],
       ),
-      drawer: Drawer(),
       body: _build(),
     );
   }
